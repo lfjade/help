@@ -108,8 +108,49 @@
         </select>
     </form>
 </div>
-<a href = "analog.html">ANALOGYCAL RESULTS</a>
+<button onclick="verificarRespostas()">Verificar Respostas</button>
 
+<script>
+function verificarRespostas() {
+    const respostasCompreensao = [
+        "It makes maintenance harder.",
+        "No.",
+        "I refactor my code."
+    ];
+
+    const respostasGramatica = [
+        ["Simple Present", "affirmative"],
+        ["Present Continuous", "negative"],
+        ["Present Continuous", "interrogative"],
+        ["Imperative", "affirmative"]
+    ];
+
+    const selects = document.querySelectorAll("form select");
+    let acertos = 0;
+    let index = 0;
+
+    // Corrigir compreensão de texto
+    for (let i = 0; i < respostasCompreensao.length; i++) {
+        const respostaUsuario = selects[index].value;
+        if (respostaUsuario === respostasCompreensao[i]) {
+            acertos++;
+        }
+        index++;
+    }
+
+    // Corrigir gramática
+    for (let i = 0; i < respostasGramatica.length; i++) {
+        const tempo = selects[index].value;
+        const forma = selects[index + 1].value;
+        if (tempo === respostasGramatica[i][0] && forma === respostasGramatica[i][1]) {
+            acertos++;
+        }
+        index += 2;
+    }
+
+    alert(`Você acertou ${acertos} de 7 perguntas!`);
+}
+</script>
 </div>
 </body>
 </html>
